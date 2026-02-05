@@ -5,32 +5,32 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Orbitron', sans-serif;
+    font-family: sans-serif;
+    font-weight: bold;
 }
 
-html,
-body {
+html, body {
     width: 100%;
     height: 100%;
 }
 
-/* ========================= VARIABLES – LAVA INFERNO ========================= */
+
+/* ========================= VARIABLES – GINGA STREET STYLE ========================= */
 :root {
-    --lava-red: #ff2a2a;
-    --lava-orange: #ff7a00;
-    --lava-glow: #ff3c00;
-    --dark-1: #0a0a0f;
-    --dark-2: #121218;
-    --dark-3: #1a1a24;
-    --text: #ffe9e6;
+    --yellow-main: #ffd800;
+    --yellow-glow: #ffe600;
+    --green-accent: #00c853;
+    --dark-glass: rgba(10, 10, 10, .78);
+    --dark-strong: rgba(0, 0, 0, .88);
+    --text: #ffffff;
 }
 
-/* ========================= BODY ========================= */
+
+/* ========================= BODY (TU FONDO REAL) ========================= */
 body {
     background:
-        radial-gradient(circle at 20% 0%, rgba(255, 60, 0, .18), transparent 45%),
-        radial-gradient(circle at 80% 100%, rgba(255, 0, 0, .12), transparent 50%),
-        linear-gradient(180deg, var(--dark-2), var(--dark-1));
+        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.65)), /* oscurece para mejor contraste */
+        url("fondo.jpg") center/cover no-repeat fixed;
 
     display: flex;
     align-items: center;
@@ -39,18 +39,19 @@ body {
     color: var(--text);
 }
 
-/* ========================= BLUR BACKGROUND ========================= */
+
+/* ========================= BLUR GLOW EXTRA ========================= */
 .background-blur {
     position: fixed;
     inset: 0;
-    background: url("logowhite.png") no-repeat center;
-    background-size: 280px;
-    filter: blur(130px);
-    opacity: 0.12;
+    background: radial-gradient(circle, var(--yellow-glow), transparent 60%);
+    filter: blur(140px);
+    opacity: .15;
     z-index: -1;
 }
 
-/* ========================= CONTAINER (POPUP) ========================= */
+
+/* ========================= CONTAINER (GLASS CARD GAMER) ========================= */
 .container {
     display: flex;
     align-items: center;
@@ -59,17 +60,22 @@ body {
     max-width: 390px;
     min-height: 560px;
 
-    background: linear-gradient(180deg, rgba(25, 15, 15, .96), rgba(12, 8, 8, .98));
+    background: var(--dark-glass);
+
+    backdrop-filter: blur(18px);
 
     border-radius: 22px;
     padding: 22px;
 
+    border: 2px solid rgba(255, 216, 0, .35);
+
     box-shadow:
-        0 0 40px rgba(255, 60, 0, .35),
-        inset 0 0 30px rgba(0, 0, 0, .85);
+        0 0 40px rgba(255, 216, 0, .45),
+        inset 0 0 30px rgba(0, 0, 0, .9);
 
     position: relative;
 }
+
 
 /* ========================= SECTIONS ========================= */
 .section {
@@ -83,11 +89,14 @@ body {
     display: flex;
 }
 
+
 /* ========================= TITLE ========================= */
 #titulo-logo {
     width: 80%;
     margin-bottom: 10px;
+    filter: drop-shadow(0 0 10px var(--yellow-main));
 }
+
 
 /* ========================= INPUTS ========================= */
 .input-container {
@@ -110,8 +119,8 @@ body {
     padding-left: 48px;
     border-radius: 14px;
 
-    border: 1px solid rgba(255, 80, 40, .35);
-    background: rgba(20, 10, 10, .75);
+    border: 1px solid rgba(255, 216, 0, .45);
+    background: rgba(0, 0, 0, .6);
 
     color: #fff;
     font-size: 14px;
@@ -120,42 +129,39 @@ body {
 }
 
 .input::placeholder {
-    color: rgba(255, 255, 255, .4);
+    color: rgba(255, 255, 255, .45);
 }
 
 .input:focus {
-    border-color: var(--lava-orange);
-    box-shadow: 0 0 14px rgba(255, 80, 0, .9);
+    border-color: var(--yellow-main);
+    box-shadow: 0 0 16px var(--yellow-glow);
 }
 
-/* ========================= BUTTON ========================= */
+
+/* ========================= BUTTON (ESTILO NEON AMARILLO) ========================= */
 .btn {
     width: 100%;
     height: 52px;
     border-radius: 16px;
     border: none;
 
-    background: linear-gradient(135deg, var(--lava-red), var(--lava-orange));
+    background: linear-gradient(135deg, var(--yellow-main), var(--green-accent));
 
-    color: #fff;
+    color: #000;
     font-weight: 800;
     letter-spacing: 1px;
     cursor: pointer;
 
-    box-shadow: 0 0 20px rgba(255, 60, 0, .7);
+    box-shadow: 0 0 25px rgba(255, 216, 0, .8);
 
     transition: .25s;
 }
 
 .btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 35px rgba(255, 100, 0, 1);
+    box-shadow: 0 0 40px rgba(255, 230, 0, 1);
 }
 
-.btn:disabled {
-    opacity: .6;
-    cursor: not-allowed;
-}
 
 /* ========================= SPINNER ========================= */
 .spinner {
@@ -163,8 +169,8 @@ body {
     width: 36px;
     height: 36px;
 
-    border: 4px solid rgba(255, 255, 255, .2);
-    border-top: 4px solid var(--lava-orange);
+    border: 4px solid rgba(255,255,255,.2);
+    border-top: 4px solid var(--yellow-main);
 
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -172,24 +178,17 @@ body {
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
 }
 
-/* ========================= PLATFORMS ========================= */
-.platforms {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
 
+/* ========================= MINI BUTTONS ========================= */
 .mini-btn {
     padding: 8px 14px;
     border-radius: 12px;
 
-    background: rgba(255, 80, 40, .1);
-    border: 1px solid rgba(255, 80, 40, .4);
+    background: rgba(255, 216, 0, .12);
+    border: 1px solid rgba(255, 216, 0, .45);
 
     color: #fff;
     font-size: 12px;
@@ -198,67 +197,26 @@ body {
 }
 
 .mini-btn:hover {
-    background: rgba(255, 80, 40, .35);
+    background: rgba(255, 216, 0, .4);
 }
 
-/* ========================= SECTION 2 ========================= */
-.congratu {
-    font-size: 22px;
-    margin-bottom: 12px;
-
-    color: var(--lava-orange);
-    text-shadow: 0 0 16px rgba(255, 80, 0, 1);
-}
-
-/* ========================= REWARD GRID ========================= */
-.reward-row {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-}
 
 /* ========================= REWARD BOX ========================= */
 .reward-box {
-    background: rgba(20, 10, 10, .75);
+    background: rgba(0,0,0,.6);
 
     border-radius: 16px;
     padding: 14px;
     text-align: center;
 
     box-shadow:
-        0 0 18px rgba(255, 60, 0, .35),
-        inset 0 0 12px rgba(0, 0, 0, .85);
+        0 0 20px rgba(255, 216, 0, .35);
 
-    animation: pop .4s ease;
+    border: 1px solid rgba(255,216,0,.25);
 }
 
-@keyframes pop {
-    from {
-        transform: scale(.7);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
 
-.coin {
-    width: 46px;
-    margin-bottom: 6px;
-}
-
-.amount-display {
-    font-size: 16px;
-}
-
-.coins-text {
-    font-size: 12px;
-    color: rgba(255, 255, 255, .65);
-}
-
-/* ========================= CONFETTI ========================= */
+/* ========================= CONFETTI (VERDE/AMARILLO) ========================= */
 .confetti {
     position: fixed;
     top: -10px;
@@ -267,45 +225,20 @@ body {
     opacity: .9;
     animation: fall linear forwards;
     z-index: 999;
-    background: var(--lava-orange);
+    background: var(--yellow-main);
 }
 
-@keyframes fall {
-    to {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
-    }
+#boxFrags img{
+        width: 30%;
 }
 
-/* ========================= RESPONSIVE MOBILE ========================= */
+/* ========================= RESPONSIVE ========================= */
 @media (max-width: 420px) {
     .container {
         width: 92vw;
         min-height: auto;
         padding: 18px;
     }
-
-    .reward-row {
-        grid-template-columns: 1fr;
-    }
-
-    .congratu {
-        font-size: 20px;
-    }
 }
 
-/* ========================= COIN ANIMATION ========================= */
-#section2.active .coin {
-    animation: coinSpin 1.2s ease forwards;
-}
 
-@keyframes coinSpin {
-    from {
-        transform: rotateY(0deg) scale(0);
-        opacity: 0;
-    }
-    to {
-        transform: rotateY(720deg) scale(1);
-        opacity: 1;
-    }
-}
